@@ -549,11 +549,13 @@ class HTMLVideoPlayer extends AbstractVideoPlayer {
   destroy() {
     super.destroy();
     const { player } = this;
-    const off = player.addEventListener.bind(player);
-    off("play", this.onPlay);
-    off("pause", this.onPause);
-    off("ended", this.onEnded);
-    off("loadeddata", this.onPlayerReady);
+    if (player !== undefined) {
+      const off = player.addEventListener.bind(player);
+      off("play", this.onPlay);
+      off("pause", this.onPause);
+      off("ended", this.onEnded);
+      off("loadeddata", this.onPlayerReady);
+    }
   }
 }
 
